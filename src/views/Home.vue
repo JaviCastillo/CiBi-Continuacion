@@ -2,6 +2,7 @@
   <div class="about">
     <Navbar />
     <Sidebar />
+    <router-view />
   </div>
 </template>
 

@@ -1,11 +1,8 @@
 <template>
   <nav class="navbar navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand main-title" href="#">Cinema Billboard</a>
-      <form class="d-flex ml-auto">
-        <input class="form-control me-2" type="search" placeholder="Pelicula">
-        <button class="btn btn-outline-light mx-3" type="button">Buscar</button>
-      </form>
+      <a class="navbar-brand main-title-nav" href="#">Cinema Billboard</a>
+      <button class="btn btn-outline-light mx-3" type="button">Buscar Peliculas</button>
       <router-link to="/" type="button" class="btn btn-danger ml-auto">Salir</router-link>
     </div>
   </nav>
@@ -21,7 +18,7 @@ export default {
 <style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-.main-title{
+.main-title-nav{
   font-family: 'Pacifico', cursive;
   user-select: none;
 }

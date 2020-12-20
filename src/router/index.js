@@ -12,7 +12,19 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('../views/Home.vue')
+    component: () => import('../views/Home.vue'),
+    children: [
+      {
+        path: 'destacados',
+        name: 'Destacados',
+        component: () => import('../views/Destacados.vue')
+      },
+      {
+        path: 'watchlist',
+        name: 'Watchlist',
+        component: () => import('../views/Watchlist.vue')
+      }
+    ]
   }
 ]
 

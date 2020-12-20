@@ -1,18 +1,17 @@
 <template>
   <aside class="sidebar" @mouseover="isBig = true" @mouseleave="isBig = false" :class="{ big : isBig, small : !isBig}">
-    <i id="toggler" class="fa fa-bars fa-2x"></i>
     <div class="sidebar__icons">
       <div class="sidebar__card">
-        <a href="">
+        <router-link to="destacados" href="">
           <font-awesome-icon icon="star" size="2x" />
           <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Destacados</VueSlideToggle>
-        </a>
+        </router-link>
       </div>
       <div class="sidebar__card">
-        <a href="">
+        <router-link to="watchlist" href="">
           <font-awesome-icon icon="film" size="2x"/>
           <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Watchlist</VueSlideToggle>
-        </a>
+        </router-link>
       </div>
     </div>
   </aside>
@@ -61,7 +60,7 @@ export default {
 
 @media only screen and (min-width: 900px) {
     .big{
-        width: 220px;
+        width: 190px;
     }
 }
 
@@ -78,6 +77,7 @@ export default {
 .fa-bars{
     margin-left: 22px;
 }
+
 .sidebar__icons{
     margin: 0 22px;
 }
