@@ -1,5 +1,15 @@
 # proyecto-maqueta
 
+## Alumno: Javier Alejandro Castillo Oñatt
+
+## Entrega 1 Maqueta
+```
+Estilo:
+ Color de Fondo #1C1F40
+ Fuente de logo: Pacifico (Google Fonts)
+ 
+```
+
 ## Project setup
 ```
 npm install
