@@ -1,5 +1,5 @@
 <template>
-  <aside class="sidebar" @mouseover="isBig = true" @mouseleave="isBig = false" :class="{ big : isBig, small : !isBig}">
+  <aside class="sidebar pt-5" @mouseover="isBig = true" @mouseleave="isBig = false" :class="{ big : isBig, small : !isBig}">
     <div class="sidebar__icons">
       <div class="sidebar__card">
         <router-link to="destacados" href="">
