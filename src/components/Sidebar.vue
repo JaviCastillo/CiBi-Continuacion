@@ -8,6 +8,12 @@
         </router-link>
       </div>
       <div class="sidebar__card">
+        <router-link to="busqueda" href="">
+          <font-awesome-icon icon="search" size="2x" />
+          <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Busqueda</VueSlideToggle>
+        </router-link>
+      </div>
+      <div class="sidebar__card">
         <router-link to="watchlist" href="">
           <font-awesome-icon icon="film" size="2x"/>
           <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Watchlist</VueSlideToggle>
@@ -43,6 +49,7 @@ export default {
 
 .sidebar{
     position: fixed;
+    z-index: 4;
     left: 0;
     height: 100vh;
     padding-top: 10px;

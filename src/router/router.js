@@ -20,6 +20,11 @@ const routes = [
         component: () => import('../views/Destacados.vue')
       },
       {
+        path: 'busqueda',
+        name: 'Busqueda',
+        component: () => import('../views/Busqueda.vue')
+      },
+      {
         path: 'watchlist',
         name: 'Watchlist',
         component: () => import('../views/Watchlist.vue')
