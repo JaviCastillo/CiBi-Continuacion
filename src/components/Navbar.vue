@@ -1,15 +1,37 @@
 <template>
   <nav class="navbar navbar-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand main-title-nav" href="#">Cinema Billboard</a>
-      <router-link to="/" type="button" class="btn btn-danger ml-auto">Salir</router-link>
+      <router-link  class="navbar-brand main-title-nav" to="/home">Cinema Billboard</router-link >
+      <a class="nav-link font-weight-bold ml-auto user" href="#"><font-awesome-icon class="mx-1" icon="user" />{{usuarioActivo.given_name}} {{usuarioActivo.family_name}}</a>
+      <router-link to="/" type="button" class="btn btn-danger" @click.prevent="logout">Salir</router-link>
     </div>
   </nav>
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  computed:{
+    usuarioActivo(){
+      return this.$store.getters.getCurrentUser
+    }
+  },
+  methods: {
+    logout(){
+      let store = this.$store
+      let router = this.$router
+
+      firebase.auth().signOut().then(function() {
+              let user = false
+              store.dispatch('updateUser', user)
+              router.push('/')
+          }).catch(function(error) {
+              console.log(error);
+          });
+    }
+  },
 }
 </script>
 
@@ -23,6 +45,12 @@ export default {
 }
 nav{
   border-bottom: 1px solid gray;
+}
+a.user{
+  color: white;
+}
+a.user:hover{
+  color: lightblue;
 }
 
 </style>

@@ -8,6 +8,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faStar, faFilm, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import Firebase from 'firebase'
+import { firebaseConfig } from './config/firebaseConfig'
 
 library.add(faUser, faStar, faFilm, faSearch)
 
@@ -17,10 +19,12 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
+Firebase.initializeApp(firebaseConfig);
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  Firebase,
   render: h => h(App)
 }).$mount('#app')

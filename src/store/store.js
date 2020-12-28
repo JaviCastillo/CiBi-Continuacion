@@ -8,7 +8,8 @@ export default new Vuex.Store({
     listaUsuario: [],
     listaDestacados: [],
     listaBusqueda: [],
-    apiKey: '57de2a6f8ac0fd8de5cc5c192cac99fa'
+    apiKey: '57de2a6f8ac0fd8de5cc5c192cac99fa',
+    currentUser: false
   },
   getters: {
     getListaUsuario(state){
@@ -22,10 +23,19 @@ export default new Vuex.Store({
     },
     getApiKey(state){
       return state.apiKey
+    },
+    getCurrentUser(state){
+      return state.currentUser
     }
   },
   mutations: {
+    updateUser(state, user){
+      state.currentUser = user
+    }
   },
   actions: {
+    updateUser({commit}, user){
+      commit('updateUser', user)
+    }
   }
 })

@@ -17,16 +17,36 @@
       <hr color="gray">
       <button type="button" class="btn btn-primary my-3">Entrar con Facebook</button>
       <br>
-      <button type="button" class="btn btn-primary">Entrar con Google</button>
+      <button type="button" class="btn btn-primary" @click.prevent="googleLogin">Entrar con Google</button>
     </div>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase'
 
 export default {
   name: 'Main',
+  methods: {
+    googleLogin(){
+      let store = this.$store
+      let router = this.$router
+      if(store.getters.getCurrentUser){
+        alert('Usuario ya logueado')
+      }else{
+        let provider = new firebase.auth.GoogleAuthProvider();
 
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+            let user = result.additionalUserInfo.profile
+            store.dispatch('updateUser', user)
+            router.push('/home')
+        }).catch(function(error) {
+            var errorMessage = error.message;
+            console.log(errorMessage);
+        });
+      }
+    }
+  }  
 }
 </script>
 
