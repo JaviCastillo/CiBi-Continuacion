@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <router-link  class="navbar-brand main-title-nav" to="/home">Cinema Billboard</router-link >
       <a class="nav-link font-weight-bold ml-auto user" href="#"><font-awesome-icon class="mx-1" icon="user" />{{usuarioActivo.given_name}} {{usuarioActivo.family_name}}</a>
-      <router-link to="/" type="button" class="btn btn-danger" @click.prevent="logout">Salir</router-link>
+      <button type="button" class="btn btn-danger" @click.prevent="logout">Salir</button>
     </div>
   </nav>
 </template>

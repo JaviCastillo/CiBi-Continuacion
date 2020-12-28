@@ -12,7 +12,7 @@
           <label class="form-label">Contraseña</label>
           <input type="password" class="form-control">
         </div>
-        <router-link to="home/destacados" type="button" class="btn btn-primary">Entrar</router-link> 
+        <button type="button" class="btn btn-primary">Entrar</button> 
       </form>
       <hr color="gray">
       <button type="button" class="btn btn-primary my-3">Entrar con Facebook</button>

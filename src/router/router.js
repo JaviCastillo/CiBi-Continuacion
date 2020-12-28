@@ -21,17 +21,17 @@ const routes = [
       {
         path: 'destacados',
         name: 'Destacados',
-        component: () => import('../views/Destacados.vue')
+        component: () => import('../views/Destacados.vue'),
       },
       {
         path: 'busqueda',
         name: 'Busqueda',
-        component: () => import('../views/Busqueda.vue')
+        component: () => import('../views/Busqueda.vue'),
       },
       {
         path: 'watchlist',
         name: 'Watchlist',
-        component: () => import('../views/Watchlist.vue')
+        component: () => import('../views/Watchlist.vue'),
       }
     ]
   }
@@ -47,11 +47,11 @@ router.beforeEach((to, from, next) => {
   let user = store.getters.getCurrentUser
   let authRequired = to.matched.some(record => record.meta.requiresLogin)
   if (authRequired && !user) {
-      next("/")
+    next("/")
   } else if (user && !authRequired) {
-    next('home/destacados')
+    next("home")
   } else {
-      next()
+    next()
   }
 })
 

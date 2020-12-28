@@ -4,6 +4,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  async created(){
+    this.$store.dispatch('putDestacados')
+  }
+}
+</script>
+
 <style lang="scss">
 /* (?) */
 body, *{
