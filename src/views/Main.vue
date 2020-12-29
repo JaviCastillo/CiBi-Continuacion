@@ -15,7 +15,7 @@
         <button type="button" class="btn btn-primary">Entrar</button> 
       </form>
       <hr color="gray">
-      <button type="button" class="btn btn-primary my-3">Entrar con Facebook</button>
+      <button type="button" class="btn btn-primary my-3" @click.prevent="facebookLogin">Entrar con Facebook</button>
       <br>
       <button type="button" class="btn btn-primary" @click.prevent="googleLogin">Entrar con Google</button>
     </div>
@@ -43,6 +43,24 @@ export default {
         }).catch(function(error) {
             var errorMessage = error.message;
             console.log(errorMessage);
+        });
+      }
+    },
+    facebookLogin(){
+      let store = this.$store
+      /* let router = this.$router */
+      if(store.getters.getCurrentUser){
+        alert('Usuario ya logueado')
+      }else{
+        let provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+          var token = result.credential.accessToken;
+          console.log(token);
+          var user = result.user;
+          console.log(user);
+        }).catch(function(error) {
+          let errorMessage = error.message;
+          console.log(errorMessage);
         });
       }
     }
