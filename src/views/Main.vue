@@ -1,23 +1,11 @@
 <template>
   <div class="home">
-    <h1 class="main-title display-3 my-5">Cinema Billboard</h1>
-    <img class="float-left mx-5" src="../assets/Movie-and-Popcorn.png" alt="Cinema Billboard">
-    <div class="box-right mx-5 my-5 float-right">
-      <form>
-        <div class="mb-3">
-          <label  class="form-label">Correo Eletrónico</label>
-          <input type="email" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Contraseña</label>
-          <input type="password" class="form-control">
-        </div>
-        <button type="button" class="btn btn-primary">Entrar</button> 
-      </form>
-      <hr color="gray">
-      <button type="button" class="btn btn-primary my-3" @click.prevent="facebookLogin">Entrar con Facebook</button>
-      <br>
-      <button type="button" class="btn btn-primary" @click.prevent="googleLogin">Entrar con Google</button>
+    <h1 class="main-title display-3 mt-5">Cinema Billboard</h1>
+    <hr class="mx-5 bg-light">
+    <p class="lead">Guardas tus peliculas para ver en el futuro y crea tu propia Cartelera de Cine</p>
+    <img class="mx-5 entrada" src="../assets/Movie-and-Popcorn.png" alt="Cinema Billboard">
+    <div class="mx-5 my-5">
+      <button type="button" class="btn btn-info" @click.prevent="googleLogin">Entrar con Google</button>
     </div>
   </div>
 </template>
@@ -85,5 +73,9 @@ body{
 .box-right{
   width: 500px;
   text-align: left;
+}
+
+img.entrada{
+  height: 400px;
 }
 </style>

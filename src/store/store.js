@@ -46,14 +46,12 @@ export default new Vuex.Store({
           })
     },
     putMovies(state, userid){
-      firebase.firestore().collection(userid).orderBy('title').onSnapshot(resp => {
-        console.log(resp);
-        /* let arreglo = [];
+      firebase.firestore().collection(userid).onSnapshot(resp => {
+        let lista = []
         resp.forEach(element => {
-          arreglo.push(element)
+          lista.push(element.data())
         });
-        console.log(arreglo); */
-        /* state.listaUsuario = arreglo; */
+        state.listaUsuario = lista
       })
     },
     async addMovie(state, payload){

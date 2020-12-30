@@ -11,13 +11,22 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Sidebar from '../components/Sidebar.vue'
+import firebase from 'firebase'
 
 export default {
   name: 'Home',
   components: {
     Navbar,
     Sidebar
-  }
+  },
+  created() {
+    let uid = firebase.auth().currentUser.uid;
+    this.$store.dispatch('putMovies', uid)
+  },
+  beforeUpdate() {
+    let uid = firebase.auth().currentUser.uid;
+    this.$store.dispatch('putMovies', uid)
+  },
 }
 </script>
 

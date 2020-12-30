@@ -27,7 +27,7 @@
         <img v-else src="http://www.montecristomedia.com/_images/thumbnails/unavailable.jpg" alt="..">
         {{index.title}}
         <span v-if="index.release_date" class="year">({{index.release_date.substring(0, 4)}})</span>
-        <button class="btn btn-success float-right my-5 mr-5">Agregar a Watchlist</button>
+        <button class="btn btn-success float-right my-5 mr-5" @click.prevent="agregar(index)">Agregar a Watchlist</button>
       </div>
 
       <nav>
@@ -48,6 +48,7 @@
 
 <script>
 import axios from 'axios'
+import firebase from 'firebase'
 
 export default {
     name: 'Busqueda',
@@ -76,6 +77,11 @@ export default {
           .catch(error => {
             console.log(error.message);
           })
+      },
+      agregar(movie){
+        let uid = firebase.auth().currentUser.uid;
+        let payload = { userid: uid, pelicula: movie }
+        this.$store.dispatch('addMovie', payload)
       }
     },
 }

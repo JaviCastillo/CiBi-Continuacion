@@ -12,14 +12,14 @@
         <h1 class="font-weight-bold bg-transparent text-light text-right title">{{peliculasDestacadas[1].title}}</h1>
         <p class="bg-transparent text-right overview-right">{{peliculasDestacadas[1].overview}}</p>
         <hr class="my-4 bg-light">
-        <a class="btn btn-warning btn-lg mx-3" @click.prevent="verLista">Agregar a Watchlist</a>
+        <a class="btn btn-warning btn-lg mx-3" @click.prevent="agregar(peliculasDestacadas[1])">Agregar a Watchlist</a>
       </div>
       <div class="jumbotron container my-2 text-right bg-success py-4 featured"
           :style="{ 'backgroundImage' : `url( https://image.tmdb.org/t/p/w780${peliculasDestacadas[2].backdrop_path})`}">
         <h1 class="font-weight-bold bg-transparent text-light text-left title">{{peliculasDestacadas[2].title}}</h1>
         <p class="bg-transparent text-left overview">{{peliculasDestacadas[2].overview}}</p>
         <hr class="my-4 bg-light">
-        <a class="btn btn-warning btn-lg mx-3">Agregar a Watchlist</a>
+        <a class="btn btn-warning btn-lg mx-3" @click.prevent="agregar(peliculasDestacadas[2])">Agregar a Watchlist</a>
       </div>
   </div>
 </template>
@@ -37,14 +37,8 @@ export default {
   methods: {
     agregar(movie){
       let uid = firebase.auth().currentUser.uid;
-      console.log(uid);
-      console.log(movie);
       let payload = { userid: uid, pelicula: movie }
       this.$store.dispatch('addMovie', payload)
-    },
-    verLista(){
-      let uid = firebase.auth().currentUser.uid;
-      this.$store.dispatch('putMovies', uid)
     }
   },
 }
@@ -60,6 +54,7 @@ p.overview{
   width: 50vw; 
   overflow: hidden; 
   white-space: nowrap;
+  text-shadow: 1px 1px #000;
 }
 
 p.overview-right{
@@ -68,6 +63,7 @@ p.overview-right{
   overflow: hidden; 
   white-space: nowrap;
   margin-left: auto;
+  text-shadow: 1px 1px #000;
 }
 
 h1.title{
