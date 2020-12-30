@@ -55,8 +55,40 @@ export default new Vuex.Store({
       })
     },
     async addMovie(state, payload){
-      await firebase.firestore().collection(payload.userid).add(payload.pelicula)
-    }
+      let libre = true
+      state.listaUsuario.forEach(element => {
+          if (element.id == payload.pelicula.id) {
+              libre = false
+          }
+      })
+
+      if (libre) {
+        let confirma = confirm(`¿Deseas agregar ${payload.pelicula.title} a tu Watchlist?`)
+        if(confirma){
+          await firebase.firestore().collection(payload.userid).add(payload.pelicula).then(()=>{
+            alert('Agregada')
+          })
+        }
+      } else {
+        alert(`${payload.pelicula.title} ya se encuentra en tu Watchlist`)
+      }
+    },
+
+    deleteMovie(state, payload){
+      let confirma = confirm(`Deseas eliminar ${payload.pelicula.title} de tu Watchlist?`)
+      firebase.firestore().collection(payload.userid).onSnapshot(resp => {
+        resp.forEach(element => {
+          if(element.data().id == payload.pelicula.id){
+            if(confirma){
+              firebase.firestore().collection(payload.userid).doc(element.id).delete().then(()=>{
+                alert(`${payload.pelicula.title} ha sido eliminada de tu Watchlist`)
+              }) 
+            }
+          }
+        });
+        
+      })
+    },
   },
   actions: {
     updateUser({commit}, user){
@@ -71,11 +103,11 @@ export default new Vuex.Store({
     addMovie({commit}, payload){
       commit('addMovie', payload);
     },
-    updateMovie({commit},movie){
-      commit('updateMovie',movie);
+    updateMovie({commit}, movie){
+      commit('updateMovie', movie);
     },
-    deleteMovie({commit},movieid){
-      commit('deleteMovie',movieid);
+    deleteMovie({commit}, payload){
+      commit('deleteMovie', payload);
     },
   }
 })

@@ -22,14 +22,17 @@ export default {
     logout(){
       let store = this.$store
       let router = this.$router
+      let confirma = confirm('¿Seguro que deseas Cerrar Sesión?')
 
-      firebase.auth().signOut().then(function() {
+      if(confirma){
+        firebase.auth().signOut().then(function() {
               let user = false
               store.dispatch('updateUser', user)
               router.push('/')
           }).catch(function(error) {
               console.log(error);
           });
+      }
     }
   },
 }
