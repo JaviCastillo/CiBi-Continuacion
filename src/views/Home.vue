@@ -1,9 +1,9 @@
 <template>
-  <div class="about">
+  <div>
     <Navbar />
     <Sidebar />
     <transition name="fade">
-      <router-view/>
+      <router-view class="content"/>
     </transition>
   </div>
 </template>
@@ -31,11 +31,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* (?) */
-body{
-    /* background-color: #2c3e50; */
-    background-color: #1c1f40;
-}
 
 .fade-enter-active,
 .fade-leave-active {

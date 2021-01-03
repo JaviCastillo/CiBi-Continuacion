@@ -59,9 +59,8 @@ export default {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-/* (?) */
+
 body{
-    /* background-color: #2c3e50; */
     background-color: #1c1f40;
 }
 

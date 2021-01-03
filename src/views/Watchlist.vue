@@ -97,4 +97,8 @@ div.caja:hover{
   outline: none;
   border: none;
 }
+
+.flechita{
+  cursor: pointer;
+}
 </style>

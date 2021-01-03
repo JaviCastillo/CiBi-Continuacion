@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import firebase from 'firebase'
+import Swal from 'sweetalert2'
 
 Vue.use(Vuex)
 
@@ -54,7 +55,7 @@ export default new Vuex.Store({
         state.listaUsuario = lista
       })
     },
-    async addMovie(state, payload){
+    addMovie(state, payload){
       let libre = true
       state.listaUsuario.forEach(element => {
           if (element.id == payload.pelicula.id) {
@@ -63,31 +64,69 @@ export default new Vuex.Store({
       })
 
       if (libre) {
-        let confirma = confirm(`¿Deseas agregar ${payload.pelicula.title} a tu Watchlist?`)
-        if(confirma){
-          await firebase.firestore().collection(payload.userid).add(payload.pelicula).then(()=>{
-            alert('Agregada')
-          })
-        }
+
+        Swal.fire({
+          title: `${payload.pelicula.title}`,
+          text: `¿Deseas agregar esta película a tu Watchlist?`,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText: 'No',
+          confirmButtonText: 'Si'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            firebase.firestore().collection(payload.userid).add(payload.pelicula).then(()=>{
+              Swal.fire({
+                icon: 'success',
+                title: 'Agregada',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            })
+          }
+        })
+        
+
       } else {
-        alert(`${payload.pelicula.title} ya se encuentra en tu Watchlist`)
+        Swal.fire({
+          icon: 'warning',
+          title: `${payload.pelicula.title}`,
+          text: `Esta película ya se encuentra en tu Watchlist`,
+        })
       }
     },
 
     deleteMovie(state, payload){
-      let confirma = confirm(`Deseas eliminar ${payload.pelicula.title} de tu Watchlist?`)
+
       firebase.firestore().collection(payload.userid).onSnapshot(resp => {
         resp.forEach(element => {
           if(element.data().id == payload.pelicula.id){
-            if(confirma){
-              firebase.firestore().collection(payload.userid).doc(element.id).delete().then(()=>{
-                alert(`${payload.pelicula.title} ha sido eliminada de tu Watchlist`)
-              }) 
-            }
+            Swal.fire({
+              title: `${payload.pelicula.title}`,
+              text: `¿Deseas eliminar esta película de tu Watchlist?`,
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              cancelButtonText: 'No',
+              confirmButtonText: 'Si'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                firebase.firestore().collection(payload.userid).doc(element.id).delete().then(()=>{
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Eliminada',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                })
+              }
+            })
           }
-        });
-        
+        })
       })
+
     },
   },
   actions: {

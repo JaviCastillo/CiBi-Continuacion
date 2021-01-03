@@ -25,8 +25,8 @@
       <div class="movie-searchcard" v-for="index in respuesta" :key="index.id">
         <img v-if="index.poster_path" :src="`https://image.tmdb.org/t/p/w92${index.poster_path}`" :alt="index.title">
         <img v-else src="http://www.montecristomedia.com/_images/thumbnails/unavailable.jpg" class="poster-search" :alt="index.title">
-        <span class="d-inline-block title-search text-truncate ml-2">{{index.title}}</span>
-        <span v-if="index.release_date" class="year">({{index.release_date.substring(0, 4)}})</span>
+        <span class="d-inline-block title-search text-truncate mx-2">{{index.title}}</span>
+        <span v-if="index.release_date" class="year mobile">({{index.release_date.substring(0, 4)}})</span>
         <button class="btn btn-success float-right my-5 mr-5" @click.prevent="agregar(index)">Agregar a Watchlist</button>
       </div>
 
@@ -96,7 +96,7 @@ h1.busqueda{
 }
 
 .title-search{
-  width: 50vw; 
+  width: 47vw; 
 }
 
 .poster-search{
@@ -137,4 +137,9 @@ input.campo:focus{
   font-weight: normal;
 }
 
+@media only screen and (max-width: 600px) {
+  .mobile {
+    display: none;
+  }
+}
 </style>

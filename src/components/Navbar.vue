@@ -2,7 +2,7 @@
   <nav class="navbar navbar-dark fixed-top">
     <div class="container-fluid">
       <router-link  class="navbar-brand main-title-nav" to="/home">Cinema Billboard</router-link >
-      <router-link class="nav-link font-weight-bold ml-auto user" to="/home/watchlist"><font-awesome-icon class="mx-1" icon="user" />{{usuarioActivo.given_name}} {{usuarioActivo.family_name}} <span class="tiny">( {{usuarioActivo.email}} )</span></router-link>
+      <router-link class="nav-link font-weight-bold ml-auto user mobile" to="/home/watchlist"><font-awesome-icon class="mx-1" icon="user" />{{usuarioActivo.given_name}} {{usuarioActivo.family_name}} <span class="tiny">( {{usuarioActivo.email}} )</span></router-link>
       <button type="button" class="btn btn-danger" @click.prevent="logout">Salir</button>
     </div>
   </nav>
@@ -10,6 +10,7 @@
 
 <script>
 import firebase from 'firebase'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'Navbar',
@@ -22,17 +23,26 @@ export default {
     logout(){
       let store = this.$store
       let router = this.$router
-      let confirma = confirm('¿Seguro que deseas Cerrar Sesión?')
 
-      if(confirma){
-        firebase.auth().signOut().then(function() {
+      Swal.fire({
+        title: '¿Seguro que deseas salir?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'No, me quedo',
+        confirmButtonText: 'Si, deseo salir'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          firebase.auth().signOut().then(function() {
               let user = false
               store.dispatch('updateUser', user)
               router.push('/')
           }).catch(function(error) {
               console.log(error);
           });
-      }
+        }
+      })
     }
   },
 }
@@ -58,5 +68,11 @@ a.user:hover{
 span.tiny{
   font-size: 12px;
   font-weight: normal;
+}
+
+@media only screen and (max-width: 600px) {
+  .mobile {
+    display: none;
+  }
 }
 </style>
