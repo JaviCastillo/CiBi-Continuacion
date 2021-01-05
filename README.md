@@ -4,12 +4,15 @@
 
 ## Entrega 1 Maqueta
 ```
-Se define en primera instancia, de modo de crear una aplicacion que se conecte con una API externa, y al mismo tiempo usar las funcionalidades de Firebase (Autentificacion, Cloud Firestore y Hosting), la construccion de un sitio donde los usuarios puedan guardar una lista de peliculas para ver en el futuro.
+Se define en primera instancia, de modo de crear una aplicacion que se conecte con una API externa, 
+y al mismo tiempo usar las funcionalidades de Firebase (Autentificacion, Cloud Firestore y Hosting), 
+la construccion de un sitio donde los usuarios puedan guardar una lista de peliculas para ver en el futuro.
 
 Nombre Provisorio: "Cinema Billboard"
 
 Se dibujan maquetas de lo que serian las vistas(Login, Busqueda de Peliculas, Lista de Peliculas Guardadas)
-Se define que se usara la API de The Movie Database, La cual requiere inscribirse en el el sitio para obtener una APIkey.
+Se define que se usara la API de The Movie Database, La cual requiere inscribirse en el el sitio para obtener 
+una APIkey.
 
 Estilo:
  Color de Fondo #1C1F40
@@ -19,12 +22,16 @@ Estilo:
 
 ## Entrega 2 Datos y Lógica
 ```
-Construida ya una version rudimentaria del sitio, se procede ha hacer la conexion con la API para hacer funcionar un buscador de peliculas, y una pagina de entrada con peliculas destacadas.
+Construida ya una version rudimentaria del sitio, se procede ha hacer la conexion con la API para hacer 
+funcionar un buscador de peliculas, y una pagina de entrada con peliculas destacadas.
 ```
 
 ## Entrega 3 Firebase
 ```
-Establecida la conexion con la API, se procede ha hacer funcional el Login y Almacenamiento de peliculas por usuario con Firebase. Creando una coleccion por usuario, nombrandola con el UID del usuario. Asi tambien como asegurar que el usuario pueda buscar, agregar peliculas y quitarlas de su coleccion. Tambien poder hacer Login y Logout correctamente 
+Establecida la conexion con la API, se procede ha hacer funcional el Login y Almacenamiento de peliculas 
+por usuario con Firebase. Creando una coleccion por usuario, nombrandola con el UID del usuario. Asi tambien 
+como asegurar que el usuario pueda buscar, agregar peliculas y quitarlas de su coleccion. Tambien poder 
+hacer Login y Logout correctamente 
 ```
 
 ## Project setup
