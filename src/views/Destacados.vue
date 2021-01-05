@@ -47,6 +47,7 @@ export default {
 <style>
 div.featured{
   background-size: cover;
+  background-position-y: -50px;
 }
 
 p.overview{

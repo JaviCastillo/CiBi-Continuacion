@@ -34,24 +34,6 @@ export default {
         });
       }
     },
-    facebookLogin(){
-      let store = this.$store
-      /* let router = this.$router */
-      if(store.getters.getCurrentUser){
-        alert('Usuario ya logueado')
-      }else{
-        let provider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().signInWithPopup(provider).then(function(result) {
-          var token = result.credential.accessToken;
-          console.log(token);
-          var user = result.user;
-          console.log(user);
-        }).catch(function(error) {
-          let errorMessage = error.message;
-          console.log(errorMessage);
-        });
-      }
-    }
   }  
 }
 </script>

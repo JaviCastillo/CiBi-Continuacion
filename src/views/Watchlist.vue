@@ -12,6 +12,9 @@
               <font-awesome-icon class="mx-1 bg-transparent" :icon="['fas','play']" />Trailer</a>
             </p>
             <hr class="my-4 bg-light">
+            <p class="float-left bg-transparent">
+              <font-awesome-icon v-for="i in 5" :key="i" icon="star" size="lg" class="bg-transparent mx-1 star-rating" 
+                                  @click="valorar(i)" :style="{'color' : i <= parseInt(selected.user_rating)?  'yellow' : 'lightgrey'}" /></p>
             <a class="btn btn-warning btn-lg mx-3" @click.prevent="deleteMovie(selected)">Quitar de Watchlist</a>
           </div>
         </b-collapse>
@@ -30,9 +33,6 @@
               <div class="card-body pt-2 pb-0 bg-warning">
                 <p class="card-title bg-warning">{{movie.title}}</p>
               </div>
-              <div class="card-footer">
-                <small class="text-muted bg-light">Ver el 02/02/2021</small>
-              </div>
             </div>
           </div>
           
@@ -49,7 +49,7 @@ export default {
     data() {
       return {
         selected: {},
-        chevron: false
+        chevron: false,
       }
     },
     computed:{
@@ -68,7 +68,13 @@ export default {
         let uid = firebase.auth().currentUser.uid;
         let payload = { userid: uid, pelicula: movie }
         this.$store.dispatch('deleteMovie', payload)
-      }
+      },
+      valorar(i){
+        this.selected.user_rating = i
+        let uid = firebase.auth().currentUser.uid;
+        let payload = { userid: uid, pelicula: this.selected }
+        this.$store.dispatch('updateMovie', payload)
+      },
     },
     beforeMount() {
       if(this.lista.length > 0){
@@ -97,8 +103,11 @@ div.caja:hover{
   outline: none;
   border: none;
 }
-
 .flechita{
   cursor: pointer;
+}
+
+.star-rating:hover{
+  transform: rotate(-15deg) scale(1.3)
 }
 </style>

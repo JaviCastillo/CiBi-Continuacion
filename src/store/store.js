@@ -128,6 +128,15 @@ export default new Vuex.Store({
       })
 
     },
+    updateMovie(state, payload){
+      firebase.firestore().collection(payload.userid).onSnapshot(resp => {
+        resp.forEach(element => {
+          if(element.data().id == payload.pelicula.id){
+            firebase.firestore().collection(payload.userid).doc(element.id).update(payload.pelicula)
+          }
+        })
+      })    
+    }
   },
   actions: {
     updateUser({commit}, user){
@@ -142,8 +151,8 @@ export default new Vuex.Store({
     addMovie({commit}, payload){
       commit('addMovie', payload);
     },
-    updateMovie({commit}, movie){
-      commit('updateMovie', movie);
+    updateMovie({commit}, payload){
+      commit('updateMovie', payload);
     },
     deleteMovie({commit}, payload){
       commit('deleteMovie', payload);
