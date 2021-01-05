@@ -1,7 +1,6 @@
 /* MOCK ROUTER */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '../mocks/store'
 
 Vue.use(VueRouter)
 
@@ -10,7 +9,6 @@ const routes = [
       path: '/',
       name: 'Main',
       component: () => import('../../../src/views/Main.vue'),
-      meta: { requiresLogin: false }
     },
 /* MOCK ROUTER */
     {
@@ -18,7 +16,6 @@ const routes = [
       name: 'Home',
       redirect: '/home/destacados',
       component: () => import('../../../src/views/Home.vue'),
-      meta: { requiresLogin: true },
       children: [
         {
           path: 'destacados',
@@ -47,18 +44,6 @@ const routes = [
     routes
   })
 
-  /* MOCK ROUTER */
-  router.beforeEach((to, from, next) => {
-    let user = store.getters.getCurrentUser
-    let authRequired = to.matched.some(record => record.meta.requiresLogin)
-    if (authRequired && !user) {
-      next("/")
-    } else if (user && !authRequired) {
-      next("home")
-    } else {
-      next()
-    }
-  })
   
   /* MOCK ROUTER */
   export default router

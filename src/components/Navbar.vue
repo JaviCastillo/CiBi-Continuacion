@@ -36,7 +36,9 @@ export default {
         if (result.isConfirmed) {
           firebase.auth().signOut().then(function() {
               let user = false
+              let uid = false
               store.dispatch('updateUser', user)
+              store.dispatch('setUserid', uid)
               router.push('/')
           }).catch(function(error) {
               console.log(error);

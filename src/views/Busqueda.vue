@@ -48,7 +48,6 @@
 
 <script>
 import axios from 'axios'
-import firebase from 'firebase'
 
 export default {
     name: 'Busqueda',
@@ -79,8 +78,7 @@ export default {
           })
       },
       agregar(movie){
-        let uid = firebase.auth().currentUser.uid;
-        let payload = { userid: uid, pelicula: movie }
+        let payload = { pelicula: movie }
         this.$store.dispatch('addMovie', payload)
       }
     },

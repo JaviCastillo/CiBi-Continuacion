@@ -3,7 +3,7 @@
       <div class="container mt-5">
         <h1 v-if="lista.length <= 0">Tu Watchlist</h1>
         <p class="my-4" v-if="lista.length <= 0">Busca peliculas para agregarlas aquí</p>
-        <b-collapse id="collapse-2" v-if="lista.length > 0">
+        <b-collapse id="collapse-2" v-if="lista.length > 0" v-model="visible">
           <div class="jumbotron container mb-1 text-right bg-transparent py-4 featured"
               :style="[selected.backdrop_path ? { 'backgroundImage' : `url( https://image.tmdb.org/t/p/w780${selected.backdrop_path})`} : {'backgroundImage' : `url(https://www.culturewhisper.com/images/thumbs/cw-36141-620x352.jpg)`}]">
             <h1 class="font-weight-bold bg-transparent text-light text-left title">{{selected.title}}</h1>
@@ -27,7 +27,7 @@
         <div class="row row-cols-2 row-cols-md-6 g-4">
           <div class="col mb-3 p-0 text-dark" v-for="(movie) in lista" :key="movie.id">
             <!-- col sobrepone sidebar -->
-            <div class="card carta h-100 mx-auto caja" @click.prevent="mostrar(movie)">
+            <div class="card carta h-100 mx-auto caja" @click.prevent="mostrar(movie)" aria-controls="collapse-2">
               <img v-if="movie.poster_path" :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`" class="card-img-top poster" :alt="movie.title">
               <img v-else src="http://www.montecristomedia.com/_images/thumbnails/unavailable.jpg" class="card-img-top poster" :alt="movie.title">
               <div class="card-body pt-2 pb-0 bg-warning">
@@ -42,14 +42,13 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-
 export default {
     name: 'Watchlist',
     data() {
       return {
         selected: {},
         chevron: false,
+        visible: false
       }
     },
     computed:{
@@ -60,19 +59,20 @@ export default {
     methods: {
       mostrar(movie){
         this.selected = movie
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.visible = true
+        this.chevron = true
       },
       chevronMove(){
         this.chevron = !this.chevron
       },
       deleteMovie(movie){
-        let uid = firebase.auth().currentUser.uid;
-        let payload = { userid: uid, pelicula: movie }
+        let payload = { pelicula: movie }
         this.$store.dispatch('deleteMovie', payload)
       },
       valorar(i){
         this.selected.user_rating = i
-        let uid = firebase.auth().currentUser.uid;
-        let payload = { userid: uid, pelicula: this.selected }
+        let payload = { pelicula: this.selected }
         this.$store.dispatch('updateMovie', payload)
       },
     },

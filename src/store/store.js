@@ -12,7 +12,8 @@ export default new Vuex.Store({
     listaDestacados: [],
     listaBusqueda: [],
     apiKey: '57de2a6f8ac0fd8de5cc5c192cac99fa',
-    currentUser: false
+    currentUser: false,
+    userid: false
   },
   getters: {
     getListaUsuario(state){
@@ -29,11 +30,17 @@ export default new Vuex.Store({
     },
     getCurrentUser(state){
       return state.currentUser
+    },
+    getUserid(state){
+      return state.userid
     }
   },
   mutations: {
     updateUser(state, user){
       state.currentUser = user
+    },
+    setUserid(state, newuserid){
+      state.userid = newuserid
     },
     putDestacados(state){
       axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${state.apiKey}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
@@ -46,8 +53,8 @@ export default new Vuex.Store({
             console.log(error.message);
           })
     },
-    putMovies(state, userid){
-      firebase.firestore().collection(userid).onSnapshot(resp => {
+    putMovies(state){
+      firebase.firestore().collection(state.userid).onSnapshot(resp => {
         let lista = []
         resp.forEach(element => {
           lista.push(element.data())
@@ -76,7 +83,7 @@ export default new Vuex.Store({
           confirmButtonText: 'Si'
         }).then((result) => {
           if (result.isConfirmed) {
-            firebase.firestore().collection(payload.userid).add(payload.pelicula).then(()=>{
+            firebase.firestore().collection(state.userid).add(payload.pelicula).then(()=>{
               Swal.fire({
                 icon: 'success',
                 title: 'Agregada',
@@ -99,7 +106,7 @@ export default new Vuex.Store({
 
     deleteMovie(state, payload){
 
-      firebase.firestore().collection(payload.userid).onSnapshot(resp => {
+      firebase.firestore().collection(state.userid).onSnapshot(resp => {
         resp.forEach(element => {
           if(element.data().id == payload.pelicula.id){
             Swal.fire({
@@ -113,7 +120,7 @@ export default new Vuex.Store({
               confirmButtonText: 'Si'
             }).then((result) => {
               if (result.isConfirmed) {
-                firebase.firestore().collection(payload.userid).doc(element.id).delete().then(()=>{
+                firebase.firestore().collection(state.userid).doc(element.id).delete().then(()=>{
                   Swal.fire({
                     icon: 'success',
                     title: 'Eliminada',
@@ -129,10 +136,10 @@ export default new Vuex.Store({
 
     },
     updateMovie(state, payload){
-      firebase.firestore().collection(payload.userid).onSnapshot(resp => {
+      firebase.firestore().collection(state.userid).onSnapshot(resp => {
         resp.forEach(element => {
           if(element.data().id == payload.pelicula.id){
-            firebase.firestore().collection(payload.userid).doc(element.id).update(payload.pelicula)
+            firebase.firestore().collection(state.userid).doc(element.id).update(payload.pelicula)
           }
         })
       })    
@@ -142,11 +149,14 @@ export default new Vuex.Store({
     updateUser({commit}, user){
       commit('updateUser', user)
     },
+    setUserid({commit}, newuserid){
+      commit('setUserid', newuserid)
+    },
     putDestacados({commit}){
       commit('putDestacados')
     },
-    putMovies({commit}, userid){
-      commit('putMovies', userid);
+    putMovies({commit}){
+      commit('putMovies');
     },
     addMovie({commit}, payload){
       commit('addMovie', payload);

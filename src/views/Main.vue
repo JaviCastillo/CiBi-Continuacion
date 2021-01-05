@@ -26,7 +26,9 @@ export default {
 
         firebase.auth().signInWithPopup(provider).then(function(result) {
             let user = result.additionalUserInfo.profile
+            let uid = firebase.auth().currentUser.uid
             store.dispatch('updateUser', user)
+            store.dispatch('setUserid', uid)
             router.push('/home')
         }).catch(function(error) {
             var errorMessage = error.message;

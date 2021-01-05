@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-
 export default {
   name: 'Destacados',
   computed:{
@@ -36,8 +34,7 @@ export default {
   },
   methods: {
     agregar(movie){
-      let uid = firebase.auth().currentUser.uid;
-      let payload = { userid: uid, pelicula: movie }
+      let payload = { pelicula: movie }
       this.$store.dispatch('addMovie', payload)
     }
   },
