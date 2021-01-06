@@ -46,7 +46,6 @@ export default {
     name: 'Watchlist',
     data() {
       return {
-        selected: {},
         chevron: false,
         visible: false
       }
@@ -54,11 +53,14 @@ export default {
     computed:{
       lista(){
         return this.$store.getters.getListaUsuario
+      },
+      selected(){
+        return this.$store.getters.getSelected
       }
     },
     methods: {
       mostrar(movie){
-        this.selected = movie
+        this.$store.dispatch('setSelected', movie)
         window.scrollTo({ top: 0, behavior: 'smooth' });
         this.visible = true
         this.chevron = true
@@ -71,14 +73,15 @@ export default {
         this.$store.dispatch('deleteMovie', payload)
       },
       valorar(i){
-        this.selected.user_rating = i
-        let payload = { pelicula: this.selected }
+        let ratedMovie = this.selected
+        ratedMovie.user_rating = i
+        let payload = { pelicula: ratedMovie }
         this.$store.dispatch('updateMovie', payload)
       },
     },
     beforeMount() {
       if(this.lista.length > 0){
-        this.selected = this.lista[0]
+        this.$store.dispatch('setSelected', this.lista[0])
       }
     },
 }

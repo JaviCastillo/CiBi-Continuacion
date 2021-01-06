@@ -13,7 +13,8 @@ export default new Vuex.Store({
     listaBusqueda: [],
     apiKey: '57de2a6f8ac0fd8de5cc5c192cac99fa',
     currentUser: false,
-    userid: false
+    userid: false,
+    selected: {}
   },
   getters: {
     getListaUsuario(state){
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
     getUserid(state){
       return state.userid
+    },
+    getSelected(state){
+      return state.selected
     }
   },
   mutations: {
@@ -41,6 +45,9 @@ export default new Vuex.Store({
     },
     setUserid(state, newuserid){
       state.userid = newuserid
+    },
+    setSelected(state, newmovie){
+      state.selected = newmovie
     },
     putDestacados(state){
       axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${state.apiKey}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
@@ -105,6 +112,14 @@ export default new Vuex.Store({
     },
 
     deleteMovie(state, payload){
+      let indice = 0
+      let sumar = 0
+      state.listaUsuario.forEach(element => {
+          sumar++
+          if (element.id == payload.pelicula.id) {
+              indice = sumar-1
+          }
+      })
 
       firebase.firestore().collection(state.userid).onSnapshot(resp => {
         resp.forEach(element => {
@@ -127,6 +142,7 @@ export default new Vuex.Store({
                     showConfirmButton: false,
                     timer: 1500
                   })
+                  state.selected = state.listaUsuario[indice]
                 })
               }
             })
@@ -151,6 +167,9 @@ export default new Vuex.Store({
     },
     setUserid({commit}, newuserid){
       commit('setUserid', newuserid)
+    },
+    setSelected({commit}, newmovie){
+      commit('setSelected', newmovie)
     },
     putDestacados({commit}){
       commit('putDestacados')
