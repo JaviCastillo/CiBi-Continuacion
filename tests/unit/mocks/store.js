@@ -13,11 +13,11 @@ export default new Vuex.Store({
         listaDestacados: [],
         apiKey: '57de2a6f8ac0fd8de5cc5c192cac99fa',
         currentUser: {
-            uid: '123abc',
             given_name: 'Nombre',
-            last_name: 'Apellido',
+            family_name: 'Apellido',
             email: 'correo@mail.com'
-        }
+        },
+        userid: '123abc'
     },
 /* MOCK STORE */
     getters: {
@@ -32,6 +32,9 @@ export default new Vuex.Store({
         },
         getCurrentUser(state){
             return state.currentUser
+        },
+        getUserid(state){
+            return state.userid
         }
     },
 /* MOCK STORE */
@@ -50,6 +53,23 @@ export default new Vuex.Store({
                 console.log(error.message);
             })
         },
+/* MOCK STORE */
+        putMovies(state){
+            if(state.userid){
+                axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${state.apiKey}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
+                    .then(response => {
+                        state.listaUsuario.push(response.data.results[0])
+                        state.listaUsuario.push(response.data.results[1])
+                        state.listaUsuario.push(response.data.results[2])
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                    })
+            }
+        },
+        addMovie(state, payload){
+            state.listaUsuario.push(payload.pelicula)
+        }
     },
 /* MOCK STORE */
     actions: {
@@ -59,9 +79,10 @@ export default new Vuex.Store({
         putDestacados({commit}){
             commit('putDestacados')
         },
-        putMovies({commit}, userid){
-            commit('putMovies', userid);
+        putMovies({commit}){
+            commit('putMovies');
         },
+/* MOCK STORE */
         addMovie({commit}, payload){
             commit('addMovie', payload);
         },

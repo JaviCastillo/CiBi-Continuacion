@@ -23,8 +23,8 @@ describe('Testing Login', () => {
       store,
       firebase,
     })
-    wrapper.vm.$router.push('/home')
-    console.log(wrapper.vm.$router.history.current.path)
+    expect(wrapper.vm.$router.history.current.path).toEqual('/')
+    expect(wrapper.text()).toContain('Cinema Billboard')
   })
 
   it('Carga Home', () => {
@@ -34,6 +34,8 @@ describe('Testing Login', () => {
       store,
       firebase,
     })
-    console.log(wrapper.vm.$router.history.current.path)
+    wrapper.vm.$router.push('/home')
+    expect(wrapper.vm.$router.history.current.path).toEqual('/home')
+    expect(wrapper.html()).toContain('navbar','sidebar','router-view')
   })
 })
