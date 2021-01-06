@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <h1 class="main-title display-3 mt-5">Cinema Billboard</h1>
+    <h1 class="main-title display-3">Cinema Billboard</h1>
     <hr class="mx-5 bg-light">
-    <p class="lead">Guardas tus peliculas para ver en el futuro y crea tu propia Cartelera de Cine</p>
-    <img class="mx-5 entrada" src="../assets/Movie-and-Popcorn.png" alt="Cinema Billboard">
+    <p class="main-sub">Guardas tus peliculas para ver en el futuro y crea tu propia Cartelera de Cine</p>
+    <img class="mx-auto mt-2 entrada" src="../assets/Movie-and-Popcorn.png" alt="Cinema Billboard">
     <div class="mx-5 my-5">
       <button type="button" class="btn btn-info" @click.prevent="googleLogin">Entrar con Google</button>
     </div>
@@ -51,6 +51,12 @@ body{
 .main-title{
   font-family: 'Pacifico', cursive;
   user-select: none;
+  margin-top: 5vh;
+  font-size: 8vh;
+}
+
+.main-sub{
+  font-size: 2.5vh;
 }
 
 .box-right{
@@ -59,6 +65,6 @@ body{
 }
 
 img.entrada{
-  height: 50vh;
+  height: 40vh;
 }
 </style>

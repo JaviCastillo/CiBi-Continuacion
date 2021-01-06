@@ -2,6 +2,13 @@
 
 ## Alumno: Javier Alejandro Castillo Oñatt
 
+# IMPORTANTE
+```
+Login con cuenta de Google
+
+Deploy disponible en https://cinema-billboard.web.app/
+```
+
 ## Entrega 1 Maqueta
 ```
 Se define en primera instancia, de modo de crear una aplicacion que se conecte con una API externa, 
