@@ -17,7 +17,8 @@ export default new Vuex.Store({
             family_name: 'Apellido',
             email: 'correo@mail.com'
         },
-        userid: '123abc'
+        userid: '123abc',
+        selected: {}
     },
 /* MOCK STORE */
     getters: {
@@ -30,11 +31,15 @@ export default new Vuex.Store({
         getApiKey(state){
             return state.apiKey
         },
+/* MOCK STORE */
         getCurrentUser(state){
             return state.currentUser
         },
         getUserid(state){
             return state.userid
+        },
+        getSelected(state){
+            return state.selected
         }
     },
 /* MOCK STORE */
@@ -42,29 +47,33 @@ export default new Vuex.Store({
         updateUser(state, user){
             state.currentUser = user
         },
+        setSelected(state, newmovie){
+            state.selected = newmovie
+        },
         putDestacados(state){
-        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${state.apiKey}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
-            .then(response => {
-                state.listaDestacados.push(response.data.results[0])
-                state.listaDestacados.push(response.data.results[1])
-                state.listaDestacados.push(response.data.results[2])
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
+            let movie1 = { id: 1, title: 'Pelicula Uno', backdrop_path: '/ocnHtipFZeiTjyToICFiKBWVnfC.jpg', 
+                            poster_path: '/qgGh5d0IHAZRlHIdFS3XWVygumR.jpg', overview: 'bla bla bla', user_rating: '3'}
+            let movie2 = { id: 2, title: 'Pelicula Dos', backdrop_path: '/ocnHtipFZeiTjyToICFiKBWVnfC.jpg', 
+                            poster_path: '/qgGh5d0IHAZRlHIdFS3XWVygumR.jpg', overview: 'bla bla bla', user_rating: '3'}
+            let movie3 = { id: 3, title: 'Pelicula Tres', backdrop_path: '/ocnHtipFZeiTjyToICFiKBWVnfC.jpg', 
+                            poster_path: '/qgGh5d0IHAZRlHIdFS3XWVygumR.jpg', overview: 'bla bla bla', user_rating: '3'}
+            state.listaDestacados.push(movie1)
+            state.listaDestacados.push(movie2)
+            state.listaDestacados.push(movie3)
         },
 /* MOCK STORE */
         putMovies(state){
             if(state.userid){
-                axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${state.apiKey}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
-                    .then(response => {
-                        state.listaUsuario.push(response.data.results[0])
-                        state.listaUsuario.push(response.data.results[1])
-                        state.listaUsuario.push(response.data.results[2])
-                    })
-                    .catch(error => {
-                        console.log(error.message);
-                    })
+                let movie1 = { id: 1, title: 'Pelicula Uno', backdrop_path: '/ocnHtipFZeiTjyToICFiKBWVnfC.jpg', 
+                            poster_path: '/qgGh5d0IHAZRlHIdFS3XWVygumR.jpg', overview: 'bla bla bla', user_rating: '3'}
+                let movie2 = { id: 2, title: 'Pelicula Dos', backdrop_path: '/ocnHtipFZeiTjyToICFiKBWVnfC.jpg', 
+                                poster_path: '/qgGh5d0IHAZRlHIdFS3XWVygumR.jpg', overview: 'bla bla bla', user_rating: '3'}
+                let movie3 = { id: 3, title: 'Pelicula Tres', backdrop_path: '/ocnHtipFZeiTjyToICFiKBWVnfC.jpg', 
+                                poster_path: '/qgGh5d0IHAZRlHIdFS3XWVygumR.jpg', overview: 'bla bla bla', user_rating: '3'}
+                state.listaUsuario.push(movie1)
+                state.listaUsuario.push(movie2)
+                state.listaUsuario.push(movie3)
+                state.selected = state.listaUsuario[0]
             }
         },
         addMovie(state, payload){
@@ -75,6 +84,9 @@ export default new Vuex.Store({
     actions: {
         updateUser({commit}, user){
             commit('updateUser', user)
+        },
+        setSelected({commit}, newmovie){
+            commit('setSelected', newmovie)
         },
         putDestacados({commit}){
             commit('putDestacados')

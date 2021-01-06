@@ -44,7 +44,10 @@ hacer Login y Logout correctamente
 ## Entrega 4 Testing y Deploy
 ```
 Se procede a diseñar e implementar pruebas, configuradas al comienzo del proyecto a realizarse 
-en Jest y Nightwatch, respectivamente con los test Unitarios y End-to-End
+en Jest y Nightwatch, respectivamente con los test Unitarios y End-to-End.
+
+El deploy se realiza utilizando el servicio de Hosting de Firebase.
+Se hace el build del proyecto en la carpeta dist.
 ```
 
 ## Project setup

@@ -2,20 +2,23 @@
 // https://nightwatchjs.org/guide
 
 module.exports = {
-  'default e2e tests': browser => {
+  'Verificar: Carga pagina principal': browser => {
     browser
       .init()
       .waitForElementVisible('#app')
-      .assert.elementPresent('.hello')
-      .assert.containsText('h1', 'Welcome to Your Vue.js App')
+      .assert.elementPresent('button')
+      .assert.containsText('h1', 'Cinema Billboard')
       .assert.elementCount('img', 1)
       .end()
   },
 
-  'example e2e test using a custom command': browser => {
+  'Verificar: Login': browser => {
     browser
-      .openHomepage()
-      .assert.elementPresent('.hello')
+      .init()
+      .waitForElementVisible('#app')
+      .waitForElementVisible('button')
+      .click('button')
+      .windowHandles(res => { console.log(res.value) })
       .end()
-  }
+  },
 }
