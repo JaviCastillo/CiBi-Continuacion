@@ -59,6 +59,6 @@ body{
 }
 
 img.entrada{
-  height: 400px;
+  height: 50vh;
 }
 </style>

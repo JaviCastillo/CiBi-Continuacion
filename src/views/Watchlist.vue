@@ -5,7 +5,7 @@
         <p class="my-4" v-if="lista.length <= 0">Busca peliculas para agregarlas aquí</p>
         <b-collapse id="collapse-2" v-if="lista.length > 0" v-model="visible">
           <div class="jumbotron container mb-1 text-right bg-transparent py-4 featured"
-              :style="[selected.backdrop_path ? { 'backgroundImage' : `url( https://image.tmdb.org/t/p/w780${selected.backdrop_path})`} : {'backgroundImage' : `url(https://www.culturewhisper.com/images/thumbs/cw-36141-620x352.jpg)`}]">
+              :style="{ 'backgroundImage' : selected.backdrop_path ? `url( https://image.tmdb.org/t/p/w780${selected.backdrop_path})` : `url(https://www.culturewhisper.com/images/thumbs/cw-36141-620x352.jpg)`}">
             <h1 class="font-weight-bold bg-transparent text-light text-left title">{{selected.title}}</h1>
             <p class="lead bg-transparent text-left">
               <a class="btn btn-danger" :href="`https://www.youtube.com/results?search_query=${selected.title}+trailer`" target="_blank" rel="">
@@ -29,7 +29,7 @@
             <!-- col sobrepone sidebar -->
             <div class="card carta h-100 mx-auto caja" @click.prevent="mostrar(movie)" aria-controls="collapse-2">
               <img v-if="movie.poster_path" :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`" class="card-img-top poster" :alt="movie.title">
-              <img v-else src="http://www.montecristomedia.com/_images/thumbnails/unavailable.jpg" class="card-img-top poster" :alt="movie.title">
+              <img v-else src="../assets/unavailable.jpg" class="card-img-top poster" :alt="movie.title">
               <div class="card-body pt-2 pb-0 bg-warning">
                 <p class="card-title bg-warning">{{movie.title}}</p>
               </div>
