@@ -12,13 +12,24 @@ module.exports = {
       .end()
   },
 
-  'Verificar: Login': browser => {
+  'Verificar: Google no acepta Login en modo debug': browser => {
+
     browser
       .init()
       .waitForElementVisible('#app')
       .waitForElementVisible('button')
       .click('button')
-      .windowHandles(res => { console.log(res.value) })
-      .end()
+    
+      browser
+        .windowHandles(res => { 
+          browser.switchWindow( res.value[1]) 
+        })
+        .waitForElementVisible('h1')
+        .waitForElementVisible('input[type=email]')
+        .setValue('input[type=email]', 'jcastillo.ejecutivowom')
+        .click('#identifierNext')
+        .waitForElementVisible('h1')
+        .assert.containsText('h1', "No se pudo acceder")
+        .end()
   },
 }
