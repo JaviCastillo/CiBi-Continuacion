@@ -58,6 +58,14 @@ h1.title{
 }
 
 /* ---- Mobile ---- */
+.mobile {
+  display: none;
+}
+
+.desktop{
+  display: inline-block;
+}
+
 .destacados-box{
   margin: 70px auto 50px auto;
 }
@@ -80,6 +88,14 @@ hr.line{
 }
 /* ---- Desktop ---- */
 @media only screen and (min-width: 768px) {
+  .mobile{
+    display: inline-block;
+  }
+
+  .desktop{
+    display: none;
+  }
+
   .destacados-box{
     margin: 70px auto;
   }

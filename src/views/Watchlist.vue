@@ -129,7 +129,7 @@ div.caja:hover{
 
 /* ---- Mobile ---- */
 .watchlist-box{
-  margin: 70px auto 50px auto;;
+  margin: 70px auto 90px auto;;
 }
 
 /* ---- Desktop ---- */

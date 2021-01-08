@@ -123,7 +123,7 @@ input.campo:focus{
 
 /* ---- Mobile ---- */
 .busqueda-box{
-  margin: 70px auto 80px auto;;
+  margin: 70px auto 90px auto;;
 }
 
 h1.busqueda{
@@ -138,12 +138,9 @@ h1.busqueda{
   margin: 2px auto 2px auto;
 }
 
-.mobile {
-  display: none;
-}
-
-.desktop{
-  display: inline-block;
+a.page-link{
+  font-size: 12px;
+  padding: 5px 6px;
 }
 
 .movie-searchcard{
@@ -188,12 +185,9 @@ h1.busqueda{
     margin: 20px 70px 20px 70px;
   }
 
-  .mobile{
-    display: inline-block;
-  }
-
-  .desktop{
-    display: none;
+  a.page-link{
+    font-size: 16px;
+    padding: 8px 10px;
   }
 
   .movie-searchcard{
