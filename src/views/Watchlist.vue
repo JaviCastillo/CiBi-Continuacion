@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-5 pt-5">
+  <div class="watchlist-box"><!-- ml-5 pt-5  -->
       <div class="container mt-5">
         <h1 v-if="lista.length <= 0">Tu Watchlist</h1>
         <p class="my-4" v-if="lista.length <= 0">Busca peliculas para agregarlas aquí</p>
@@ -12,10 +12,13 @@
               <font-awesome-icon class="mx-1 bg-transparent" :icon="['fas','play']" />Trailer</a>
             </p>
             <hr class="my-4 bg-light">
-            <p class="float-left bg-transparent">
+            <p class="float-left bg-transparent star-box">
               <font-awesome-icon v-for="i in 5" :key="i" icon="star" size="lg" class="bg-transparent mx-1 star-rating" 
                                   @click="valorar(i)" :style="{'color' : i <= parseInt(selected.user_rating)?  'yellow' : 'lightgrey'}" /></p>
-            <a class="btn btn-warning btn-lg mx-3" @click.prevent="deleteMovie(selected)">Quitar de Watchlist</a>
+            <a class="btn btn-warning btn-lg mx-3" @click.prevent="deleteMovie(selected)">
+              <span class="mobile bg-transparent">Quitar de Watchlist</span>
+              <font-awesome-icon class="mx-1 bg-transparent desktop" :icon="['fas','trash-alt']" />
+            </a>
           </div>
         </b-collapse>
 
@@ -24,7 +27,7 @@
         <font-awesome-icon :icon="['fas', 'chevron-down']" size="2x" class="my-2 flechita" 
           v-if="lista.length > 0 && !chevron" v-b-toggle="'collapse-2'" @click="chevronMove"/>
 
-        <div class="row row-cols-2 row-cols-md-6 g-4">
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4">
           <div class="col mb-3 p-0 text-dark" v-for="(movie) in lista" :key="movie.id">
             <!-- col sobrepone sidebar -->
             <div class="card carta h-100 mx-auto caja" @click.prevent="mostrar(movie)" aria-controls="collapse-2">
@@ -112,5 +115,27 @@ div.caja:hover{
 
 .star-rating:hover{
   transform: rotate(-15deg) scale(1.3)
+}
+
+.star-box{
+  background-color: #00000055 !important;
+  border-radius: 20px;
+  padding: 2px;
+}
+
+/* .card-body{
+  height: 80px;
+} */
+
+/* ---- Mobile ---- */
+.watchlist-box{
+  margin: 70px auto 50px auto;;
+}
+
+/* ---- Desktop ---- */
+@media only screen and (min-width: 768px) {
+  .watchlist-box{
+    margin: 70px auto;
+  }
 }
 </style>

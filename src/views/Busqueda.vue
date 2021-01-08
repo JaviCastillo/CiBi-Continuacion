@@ -1,10 +1,10 @@
 <template>
-  <div class="pt-5">
-      <h1 class="mt-5 float-left busqueda">Busqueda</h1>
-      <form class="mt-5">
-        <p class="container mb-4 ml-0">
+  <div class="busqueda-box"> <!-- pt-5 -->
+      <h1 class="busqueda">Busqueda</h1>
+      <form class="caja-search">
+        <p> <!-- class="container mb-4 ml-0" -->
           <input type="text" class="bg-white mx-4 campo" v-model="buscar">
-          <button type="submit" class="btn btn-primary" @click.prevent="busqueda(buscar, 1)">Buscar</button>
+          <button type="submit" class="btn btn-primary my-1" @click.prevent="busqueda(buscar, 1)">Buscar</button>
         </p>
       </form>
       
@@ -27,7 +27,10 @@
         <img v-else src="../assets/unavailable.jpg" class="poster-search" :alt="index.title">
         <span class="d-inline-block title-search text-truncate mx-2">{{index.title}}</span>
         <span v-if="index.release_date" class="year mobile">({{index.release_date.substring(0, 4)}})</span>
-        <button class="btn btn-success float-right my-5 mr-5" @click.prevent="agregar(index)">Agregar a Watchlist</button>
+        <button class="btn btn-success boton-add" @click.prevent="agregar(index)"><!-- my-5 mr-5 -->
+          <span class="mobile bg-transparent">Agregar a Watchlist</span>
+          <font-awesome-icon class="mx-1 bg-transparent desktop" :icon="['fas','plus']" />
+        </button>
       </div>
 
       <nav>
@@ -86,16 +89,6 @@ export default {
 </script>
 
 <style>
-h1.busqueda{
-  margin-left: 200px;
-  margin-right: 0;
-  font-family: 'Bebas Neue', cursive;
-  font-size: 45px;
-}
-
-.title-search{
-  width: 47vw; 
-}
 
 .poster-search{
   height: 130px;
@@ -119,25 +112,110 @@ input.campo:focus{
 .activo{
   background-color: lightblue;
 }
-.movie-searchcard{
-  width: 85vw;
-  text-align: left;
-  border: 1px solid white;
-  padding: 0;
-  margin: 10px 100px;
-  font-size: 27px;
-  font-weight: bold;
-  vertical-align: top;
-}
+
 
 .year{
   font-size: 15px;
   font-weight: normal;
 }
 
-@media only screen and (max-width: 600px) {
-  .mobile {
+
+
+/* ---- Mobile ---- */
+.busqueda-box{
+  margin: 70px auto 80px auto;;
+}
+
+h1.busqueda{
+  display: block;
+  text-align: center;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 45px;
+}
+
+.caja-search{
+  display: block;
+  margin: 2px auto 2px auto;
+}
+
+.mobile {
+  display: none;
+}
+
+.desktop{
+  display: inline-block;
+}
+
+.movie-searchcard{
+  display: flex;
+  width: 85vw;
+  text-align: left;
+  border: 1px solid white;
+  padding: 0;
+  margin: 10px auto;
+  font-size: 27px;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.title-search{
+  width: 47vw; 
+  font-size: 20px;
+  margin: auto;
+}
+
+.boton-add{
+  display: block;
+  margin: auto 5px;
+  height: 50px;
+}
+/* ---- Desktop ---- */
+@media only screen and (min-width: 768px) {
+  .busqueda-box{
+    margin: 70px auto;
+  }
+
+  h1.busqueda{
+    display: inline-block;
+    margin-left: 200px;
+    margin-right: 0;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 45px;
+  }
+
+  .caja-search{
+    display: inline-block;
+    margin: 20px 70px 20px 70px;
+  }
+
+  .mobile{
+    display: inline-block;
+  }
+
+  .desktop{
     display: none;
+  }
+
+  .movie-searchcard{
+    display: block;
+    width: 85vw;
+    text-align: left;
+    border: 1px solid white;
+    padding: 0;
+    margin: 10px 100px;
+    font-size: 27px;
+    font-weight: bold;
+    vertical-align: top;
+  }
+
+  .title-search{
+    width: 47vw; 
+    font-size: 26px;
+  }
+
+  .boton-add{
+    display: inline-block;
+    margin: auto 0 auto 4vw;
   }
 }
 </style>

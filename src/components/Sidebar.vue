@@ -1,20 +1,22 @@
 <template>
-  <aside class="sidebar pt-5" @mouseover="isBig = true" @mouseleave="isBig = false" :class="{ big : isBig, small : !isBig}">
+  <!-- ===================SIDEBAR DE PRUEBA ADAPTABLE=============== -->
+  <aside class="sidebar" @mouseover="isBig = true" @mouseleave="isBig = false" :class="{ big : isBig, small : !isBig}">
     <div class="sidebar__icons">
       <div class="sidebar__card">
-        <router-link to="destacados" href="">
-          <font-awesome-icon icon="star" size="2x" />
+        <router-link to="destacados" class="enlace">
+          <font-awesome-icon icon="star" size="2x"/>
           <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Destacados</VueSlideToggle>
         </router-link>
       </div>
       <div class="sidebar__card">
-        <router-link to="busqueda" href="">
+        <router-link to="busqueda" class="enlace">
           <font-awesome-icon icon="search" size="2x" />
           <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Busqueda</VueSlideToggle>
         </router-link>
       </div>
+  <!-- ===================SIDEBAR DE PRUEBA ADAPTABLE=============== -->
       <div class="sidebar__card">
-        <router-link to="watchlist" href="">
+        <router-link to="watchlist" class="enlace">
           <font-awesome-icon icon="film" size="2x"/>
           <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Watchlist</VueSlideToggle>
         </router-link>
@@ -25,7 +27,7 @@
 
 <script>
 import { VueSlideToggle } from 'vue-slide-toggle'
-
+/* ===================SIDEBAR DE PRUEBA ADAPTABLE=============== */
 export default {
   name: "Sidebar",
   data() {
@@ -37,6 +39,7 @@ export default {
     VueSlideToggle
   }
 };
+/* ===================SIDEBAR DE PRUEBA ADAPTABLE=============== */
 </script>
 
 <style lang="scss">
@@ -44,52 +47,77 @@ export default {
 
 .tag{
     font-family: 'Bebas Neue', cursive;
-    font-size: 22px;
+    font-size: 0px;
+    display: none;
+}
+/* ===================SIDEBAR DE PRUEBA ADAPTABLE=============== */
+
+
+/* ---- Mobile ---- */
+.sidebar{
+  position: fixed;
+  z-index: 4;
+  bottom: 0;
+  height: 10vh;
+  width: 100vw;
+  padding: 15px 20px !important;
+  text-align: left;
+  border-top: 1px solid gray;
 }
 
-.sidebar{
+.enlace:hover{
+  color: #90C2E7;
+  cursor: pointer;
+}
+
+.sidebar__card{
+  display: inline;
+  padding: 0;
+}
+.sidebar__card a{
+  display: inline-flex;
+  margin: 0 10vw;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+}
+
+/* ===================SIDEBAR DE PRUEBA ADAPTABLE=============== */
+
+/* ---- Desktop ---- */
+@media only screen and (min-width: 768px) {
+  .tag{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 22px;
+    display: inline-block;
+  }
+  
+  .sidebar{
     position: fixed;
     z-index: 4;
     left: 0;
     height: 100vh;
-    padding-top: 10px;
+    padding: 50px 0!important;
     /* background-color: #0B5351; */
     transition-duration: 0.3s;
     text-align: left;
     border-right: 1px solid gray;
-}
+  }
+  .big{
+    width: 190px;
+  }
 
-/* ---- toggle size ---- */
-
-.big{
-    width: 100vw;
-}
-
-@media only screen and (min-width: 900px) {
-    .big{
-        width: 190px;
-    }
-}
-
-.small{
+  .small{
     width: 70px;
-}
+  }
 
-/* ---- Sidebar layout ---- */
+  /* ---- Sidebar layout DESKTOP---- */
 
-#toggler{
-    cursor: pointer;
-}
-
-.fa-bars{
-    margin-left: 22px;
-}
-
-.sidebar__icons{
+  .sidebar__icons{
     margin: 0 22px;
-}
+  }
 
-.sidebar__card a{
+  .sidebar__card a{
     display: flex;
     align-items: center;
     text-align: left;
@@ -97,18 +125,9 @@ export default {
     padding: 0;
     text-decoration: none;
     color: white;
+  }
+  /* ===================SIDEBAR DE PRUEBA ADAPTABLE=============== */
+  /* ---- DESKTOP---- */
 }
-
-a:hover{
-    color: #90C2E7;
-}
-
-.sidebar__card p{
-    display: none;
-    margin-left: 30px;
-    transition-delay: 0.1s;
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-}
+/* ===================SIDEBAR DE PRUEBA ADAPTABLE=============== */
 </style>
