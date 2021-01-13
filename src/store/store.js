@@ -52,9 +52,9 @@ export default new Vuex.Store({
     putDestacados(state){
       axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${state.apiKey}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
           .then(response => {
-            state.listaDestacados.push(response.data.results[0])
-            state.listaDestacados.push(response.data.results[1])
-            state.listaDestacados.push(response.data.results[2])
+            response.data.results.forEach(e => {
+              state.listaDestacados.push(e);
+            })
           })
           .catch(error => {
             console.log(error.message);

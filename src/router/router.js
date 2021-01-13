@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/store'
+import firebase from 'firebase'
 
 Vue.use(VueRouter)
 
@@ -9,7 +10,37 @@ const routes = [
     path: '/',
     name: 'Main',
     component: () => import('../views/Main.vue'),
-    meta: { requiresLogin: false }
+    meta: { requiresLogin: false },
+    beforeEnter: (to, from, next) => {
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          let uid = user.uid
+          let loggedUser = user.providerData[0]
+          store.dispatch('updateUser', loggedUser)
+          store.dispatch('setUserid', uid)
+          let authRequired = to.matched.some(record => record.meta.requiresLogin)
+          if (authRequired && !loggedUser) {
+            next("/")
+          } else if (loggedUser && !authRequired) {
+            next("home")
+          } else {
+            next()
+          }
+
+        } else {
+          let user = null
+          let authRequired = to.matched.some(record => record.meta.requiresLogin)
+          if (authRequired && !user) {
+            next("/")
+          } else if (user && !authRequired) {
+            next("home")
+          } else {
+            next()
+          }
+        }
+      });
+    }
   },
   {
     path: '/home',

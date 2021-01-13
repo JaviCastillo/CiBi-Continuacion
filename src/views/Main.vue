@@ -24,19 +24,25 @@ export default {
       }else{
         let provider = new firebase.auth.GoogleAuthProvider();
 
-        firebase.auth().signInWithPopup(provider).then(function(result) {
-            let user = result.additionalUserInfo.profile
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(function() {
+          return firebase.auth().signInWithPopup(provider).then(() => {
             let uid = firebase.auth().currentUser.uid
+            let user = firebase.auth().currentUser.providerData[0]
             store.dispatch('updateUser', user)
             store.dispatch('setUserid', uid)
             router.push('/home')
-        }).catch(function(error) {
+          }).catch(function(error) {
             var errorMessage = error.message;
             console.log(errorMessage);
+          });
+        })
+        .catch(function(error) {
+          var errorMessage = error.message;
+          console.log(errorMessage);
         });
       }
     },
-  }  
+  },
 }
 </script>
 

@@ -2,7 +2,7 @@
   <nav class="navbar navbar-dark fixed-top">
     <div class="container-fluid">
       <router-link  class="navbar-brand main-title-nav" to="/home">Cinema Billboard</router-link >
-      <router-link class="nav-link font-weight-bold ml-auto user mobile" to="/home/watchlist"><font-awesome-icon class="mx-1" icon="user" />{{usuarioActivo.given_name}} {{usuarioActivo.family_name}} <span class="tiny">( {{usuarioActivo.email}} )</span></router-link>
+      <router-link class="nav-link font-weight-bold ml-auto user mobile" to="/home/watchlist"><font-awesome-icon class="mx-1" icon="user" />{{usuarioActivo.displayName}} <span class="tiny">( {{usuarioActivo.email}} )</span></router-link>
       <button type="button" class="btn btn-danger" @click.prevent="logout">Salir</button>
     </div>
   </nav>
@@ -61,6 +61,7 @@ export default {
 nav{
   border-bottom: 1px solid gray;
 }
+
 a.user{
   color: white;
 }

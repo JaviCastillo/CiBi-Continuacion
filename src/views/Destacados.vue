@@ -1,34 +1,26 @@
 <template>
   <div class="destacados-box"><!-- ml-5 pt-5 -->
-      <div class="jumbotron container mb-2 mt-4 text-right py-4 featured" 
-          :style="{ 'backgroundImage' : `url( https://image.tmdb.org/t/p/w780${peliculasDestacadas[0].backdrop_path})`}">
-        <h1 class="text-light bg-transparent text-left title">{{peliculasDestacadas[0].title}}</h1>
-        <p class="bg-transparent text-left overview" >{{peliculasDestacadas[0].overview}}</p>
-        <hr class="my-4 bg-light line">
-        <a class="btn btn-warning btn-lg mx-3" @click.prevent="agregar(peliculasDestacadas[0])">
-          <span class="mobile bg-transparent">Agregar a Watchlist</span>
-          <font-awesome-icon class="mx-1 bg-transparent desktop" :icon="['fas','plus']" />
-        </a>
-      </div>
-      <div class="jumbotron container my-2 text-left bg-success py-4 featured" 
-          :style="{ 'backgroundImage' : `url( https://image.tmdb.org/t/p/w780${peliculasDestacadas[1].backdrop_path})`}">
-        <h1 class="bg-transparent text-light text-right title">{{peliculasDestacadas[1].title}}</h1>
-        <p class="bg-transparent text-right overview-right">{{peliculasDestacadas[1].overview}}</p>
-        <hr class="my-4 bg-light line">
-        <a class="btn btn-warning btn-lg mx-3" @click.prevent="agregar(peliculasDestacadas[1])">
-          <span class="mobile bg-transparent">Agregar a Watchlist</span>
-          <font-awesome-icon class="mx-1 bg-transparent desktop" :icon="['fas','plus']" />
-        </a>
-      </div>
-      <div class="jumbotron container my-2 text-right bg-success py-4 featured"
-          :style="{ 'backgroundImage' : `url( https://image.tmdb.org/t/p/w780${peliculasDestacadas[2].backdrop_path})`}">
-        <h1 class="bg-transparent text-light text-left title">{{peliculasDestacadas[2].title}}</h1>
-        <p class="bg-transparent text-left overview">{{peliculasDestacadas[2].overview}}</p>
-        <hr class="my-4 bg-light line">
-        <a class="btn btn-warning btn-lg mx-3" @click.prevent="agregar(peliculasDestacadas[2])">
-          <span class="mobile bg-transparent">Agregar a Watchlist</span>
-          <font-awesome-icon class="mx-1 bg-transparent desktop" :icon="['fas','plus']" />
-        </a>
+      <div v-for="(movie, i) in peliculasDestacadas" :key="movie.id">
+        <div class="jumbotron container mb-2 text-right py-4 featured" v-if="i%2 ==0"
+            :style="{ 'backgroundImage' : movie.backdrop_path ? `url( https://image.tmdb.org/t/p/w780${movie.backdrop_path})` : `url(https://www.culturewhisper.com/images/thumbs/cw-36141-620x352.jpg)`}">
+          <h1 class="text-light bg-transparent text-left title">{{movie.title}}</h1>
+          <p class="bg-transparent text-left overview" >{{movie.overview}}</p>
+          <hr class="my-4 bg-light line">
+          <a class="btn btn-warning btn-lg mx-3" @click.prevent="agregar(movie)">
+            <span class="mobile bg-transparent">Agregar a Watchlist</span>
+            <font-awesome-icon class="mx-1 bg-transparent desktop" :icon="['fas','plus']" />
+          </a>
+        </div>
+        <div class="jumbotron container my-2 text-left bg-success py-4 featured" v-else
+            :style="{ 'backgroundImage' : movie.backdrop_path ? `url( https://image.tmdb.org/t/p/w780${movie.backdrop_path})` : `url(https://www.culturewhisper.com/images/thumbs/cw-36141-620x352.jpg)`}">
+          <h1 class="bg-transparent text-light text-right title">{{movie.title}}</h1>
+          <p class="bg-transparent text-right overview-right">{{movie.overview}}</p>
+          <hr class="my-4 bg-light line">
+          <a class="btn btn-warning btn-lg mx-3" @click.prevent="agregar(movie)">
+            <span class="mobile bg-transparent">Agregar a Watchlist</span>
+            <font-awesome-icon class="mx-1 bg-transparent desktop" :icon="['fas','plus']" />
+          </a>
+        </div>
       </div>
   </div>
 </template>
@@ -51,6 +43,10 @@ export default {
 </script>
 
 <style>
+.repite{
+  margin: 0;
+  padding: 0;
+}
 
 h1.title{
   text-shadow: 2px 2px #000;
@@ -67,7 +63,7 @@ h1.title{
 }
 
 .destacados-box{
-  margin: 70px auto 50px auto;
+  margin: 70px auto 80px auto;
 }
 
 div.featured{
