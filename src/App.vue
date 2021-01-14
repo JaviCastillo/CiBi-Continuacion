@@ -22,7 +22,7 @@ export default {
 }
 
 *::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none; // Chrome, Safari and Opera 
 }
 
 .swal2-header, .swal2-icon>*, .swal2-icon-show,.swal2-image, .swal2-success, .swal2-icon-content, .swal2-html-container, .swal2-content, .swal2-title, .swal2-actions{

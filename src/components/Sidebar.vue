@@ -2,20 +2,20 @@
   <!-- ===================SIDEBAR DE PRUEBA ADAPTABLE=============== -->
   <aside class="sidebar" @mouseover="isBig = true" @mouseleave="isBig = false" :class="{ big : isBig, small : !isBig}">
     <div class="sidebar__icons">
-      <div class="sidebar__card">
+      <div class="sidebar__card card-left">
         <router-link to="destacados" class="enlace">
           <font-awesome-icon icon="star" size="2x"/>
           <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Destacados</VueSlideToggle>
         </router-link>
       </div>
-      <div class="sidebar__card">
+      <div class="sidebar__card card-center">
         <router-link to="busqueda" class="enlace">
           <font-awesome-icon icon="search" size="2x" />
           <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Busqueda</VueSlideToggle>
         </router-link>
       </div>
   <!-- ===================SIDEBAR DE PRUEBA ADAPTABLE=============== -->
-      <div class="sidebar__card">
+      <div class="sidebar__card card-right">
         <router-link to="watchlist" class="enlace">
           <font-awesome-icon icon="film" size="2x"/>
           <VueSlideToggle class="mx-3 tag" :open="isBig" tag="section" :duration="300">Watchlist</VueSlideToggle>
@@ -58,10 +58,10 @@ export default {
   position: fixed;
   z-index: 4;
   bottom: 0;
-  height: 10vh;
+  height: 8vh;
   width: 100vw;
-  padding: 15px 20px !important;
-  text-align: left;
+  padding: 0 !important;
+  text-align: center;
   border-top: 1px solid gray;
 }
 
@@ -76,9 +76,9 @@ export default {
 }
 .sidebar__card a{
   display: inline-flex;
-  margin: 0 10vw;
-  font-size: 16px;
+  font-size: 2vh;
   color: white;
+  margin: 2vh 12vw;
   text-decoration: none;
 }
 
@@ -114,7 +114,7 @@ export default {
   /* ---- Sidebar layout DESKTOP---- */
 
   .sidebar__icons{
-    margin: 0 22px;
+    margin: 0 20px;
   }
 
   .sidebar__card a{
