@@ -50,10 +50,20 @@ export default new Vuex.Store({
       state.selected = newmovie
     },
     putDestacados(state){
+      let userLang = navigator.language || navigator.userLanguage;
+      let user_iso639 = userLang.substring(0,2)
+      let user_iso3166 = userLang.substring(3,5)
+
       axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${state.apiKey}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
           .then(response => {
             response.data.results.forEach(e => {
-              state.listaDestacados.push(e);
+              axios.get(`https://api.themoviedb.org/3/movie/${e.id}/translations?api_key=${state.apiKey}`)
+                .then(response => {
+                  let coso = response.data.translations.find(e => (e.iso_639_1 == user_iso639) || (e.iso_3166_1 == user_iso3166))
+                  let lang_overview = coso.data.overview;
+                  e.userlang_overview = lang_overview
+                  state.listaDestacados.push(e);
+                })
             })
           })
           .catch(error => {
@@ -61,7 +71,7 @@ export default new Vuex.Store({
           })
     },
     putMovies(state){
-      firebase.firestore().collection(state.userid).onSnapshot(resp => {
+      firebase.firestore().collection(state.userid).orderBy("user_add", "desc").onSnapshot(resp => {
         let lista = []
         resp.forEach(element => {
           lista.push(element.data())
@@ -70,6 +80,7 @@ export default new Vuex.Store({
       })
     },
     addMovie(state, payload){
+
       let libre = true
       state.listaUsuario.forEach(element => {
           if (element.id == payload.pelicula.id) {
@@ -78,6 +89,9 @@ export default new Vuex.Store({
       })
 
       if (libre) {
+        let today = new Date()
+        payload.pelicula.user_add = today
+        payload.pelicula.user_seen = false
 
         Swal.fire({
           title: `${payload.pelicula.title}`,

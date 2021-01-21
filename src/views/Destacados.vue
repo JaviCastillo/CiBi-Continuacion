@@ -4,7 +4,7 @@
         <div class="jumbotron container mb-2 text-right py-4 featured" v-if="i%2 ==0"
             :style="{ 'backgroundImage' : movie.backdrop_path ? `url( https://image.tmdb.org/t/p/w780${movie.backdrop_path})` : `url(https://www.culturewhisper.com/images/thumbs/cw-36141-620x352.jpg)`}">
           <h1 class="text-light bg-transparent text-left title">{{movie.title}}</h1>
-          <p class="bg-transparent text-left overview" >{{movie.overview}}</p>
+          <p class="bg-transparent text-left overview" >{{movie.userlang_overview}}</p>
           <hr class="my-4 bg-light line">
           <a class="btn btn-warning btn-lg mx-3" @click.prevent="agregar(movie)">
             <span class="mobile bg-transparent">Agregar a Watchlist</span>
@@ -14,7 +14,7 @@
         <div class="jumbotron container my-2 text-left bg-success py-4 featured" v-else
             :style="{ 'backgroundImage' : movie.backdrop_path ? `url( https://image.tmdb.org/t/p/w780${movie.backdrop_path})` : `url(https://www.culturewhisper.com/images/thumbs/cw-36141-620x352.jpg)`}">
           <h1 class="bg-transparent text-light text-right title">{{movie.title}}</h1>
-          <p class="bg-transparent text-right overview-right">{{movie.overview}}</p>
+          <p class="bg-transparent text-right overview-right">{{movie.userlang_overview}}</p>
           <hr class="my-4 bg-light line">
           <a class="btn btn-warning btn-lg mx-3" @click.prevent="agregar(movie)">
             <span class="mobile bg-transparent">Agregar a Watchlist</span>
