@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/store'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 Vue.use(VueRouter)
 
@@ -77,16 +78,18 @@ const router = new VueRouter({
   } */
 })
 
+
+
 router.beforeEach((to, from, next) => {
   let user = store.getters.getCurrentUser
   let authRequired = to.matched.some(record => record.meta.requiresLogin)
   if (authRequired && !user) {
     next("/")
   } else if (user && !authRequired) {
-    next("home")
+    next("destacados")
   } else {
     next()
-  }
+  } 
 })
 
 export default router

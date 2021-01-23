@@ -8,7 +8,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faStar, faFilm, faSearch, faChevronUp, faChevronDown, faPlay, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Firebase from 'firebase'
+import Firebase from 'firebase/app'
 import { firebaseConfig } from './config/firebaseConfig'
 
 library.add(faUser, faStar, faFilm, faSearch, faChevronUp, faChevronDown, faPlay, faPlus, faTrashAlt)
